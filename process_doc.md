@@ -30,8 +30,8 @@ A Python dashboard that pulls publicly available macroeconomic indicators from F
 ### Phase 2 — Visualization
 - [x] Add plotly charts per indicator
 - [x] Summary view showing all indicators at a glance (subplot grid)
-- [ ] Configurable time window (e.g. 1Y, 5Y)
-- [ ] Combinatorial overlay (select multiple indicators on one chart)
+- [x] Configurable time window (e.g. 1Y, 5Y)
+- [x] Combinatorial overlay (select multiple indicators on one chart)
 
 **Deliverable:** Local script that produces interactive charts in browser
 
@@ -131,7 +131,7 @@ macro-tracker/
 
 ## Status
 
-🟡 **Phase 2 in progress**
+🟡 **Phase 3 in progress**
 
 ---
 

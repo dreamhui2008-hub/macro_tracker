@@ -60,18 +60,33 @@ series_data['Nonfarm Payrolls'] = get_bls_latest('CES0000000001')
 
 #Plotly Setup
 
-fig = make_subplots(
-    rows = 3, cols= 2,
-    subplot_titles=list(series_data.keys())
-)
+def filter_series(series, years):
+    cutoff = series.index.max() - pd.DateOffset(years=years)
+    return series[series.index >= cutoff]
 
-for i, (name, series) in enumerate(series_data.items()):
-    row = i // 2 + 1
-    col = i % 2 + 1
-    fig.add_trace(
-        go.Scatter(x=series.index, y=series.values, name=name),
-        row=row, col=col
+selected = [x for x in indicators]
+
+fig2 = go.Figure()
+
+for name in selected:
+    fig2.add_trace(
+        go.Scatter(x=series_data[name].index, y=series_data[name].values, name=name)
     )
+fig2.update_layout(title='Indicator Overlay', height=500)
+fig2.show()
 
-fig.update_layout(height=900, title_text='Macro Tracker', showlegend=False)
-fig.show()
+# fig = make_subplots(
+#     rows = 3, cols= 2,
+#     subplot_titles=list(series_data.keys())
+# )
+
+# for i, (name, series) in enumerate(series_data.items()):
+#     row = i // 2 + 1
+#     col = i % 2 + 1
+#     fig.add_trace(
+#         go.Scatter(x=series.index, y=series.values, name=name),
+#         row=row, col=col
+#     )
+
+# fig.update_layout(height=900, title_text='Macro Tracker', showlegend=False)
+# fig.show()
