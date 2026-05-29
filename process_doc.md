@@ -16,12 +16,12 @@ A Python dashboard that pulls publicly available macroeconomic indicators from F
 ## Project Phases
 
 ### Phase 1 — Local Script (MVP)
-- [ ] Set up Python environment (`venv`, `requirements.txt`)
-- [ ] Register for free [FRED API key](https://fred.stlouisfed.org/docs/api/api_key.html)
-- [ ] Pull one indicator (e.g. US 10Y Yield) via `fredapi`
-- [ ] Expand to full indicator list
-- [ ] Store data in a pandas DataFrame
-- [ ] Print clean output to terminal
+- [✅] Set up Python environment (`venv`, `requirements.txt`)
+- [✅] Register for free [FRED API key](https://fred.stlouisfed.org/docs/api/api_key.html)
+- [✅] Pull one indicator (e.g. US 10Y Yield) via `fredapi`
+- [✅] Expand to full indicator list
+- [✅] Store data in a pandas DataFrame
+- [✅] Print clean output to terminal
 
 **Deliverable:** Script that runs locally and prints a table of indicators with latest values
 
