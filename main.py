@@ -1,20 +1,44 @@
-import os
 from dotenv import load_dotenv
 from fredapi import Fred
+from datetime import datetime
+from plotly.subplots import make_subplots
+
+import os
 import pandas as pd
 import requests
+import plotly.express as px
+import plotly.graph_objects as go
+
+#Initial Setup
+load_dotenv()
+current_year = datetime.now().year
 
 #BLS Setup
 def get_bls_latest(series_id):
-    url = f"https://api.bls.gov/publicAPI/v2/timeseries/data/{series_id}"
-    response = requests.get(url)
-    data = response.json()
-    latest = data['Results']['series'][0]['data'][0]
-    return float(latest['value']), f"{latest['year']}-{latest['period'].replace('M', '')}-01" #adding "-01" since Nonfarm only as date per month, but we want to align with other data
+    url = f"https://api.bls.gov/publicAPI/v2/timeseries/data/"
+    headers = {'Content-type': 'application/json'}
+
+    chunks = []
+    for start in range(1950, current_year + 1, 20):
+        end = min(start + 19, current_year)
+        payload = {
+            "seriesid": [series_id],
+            "startyear": str(start),
+            "endyear": str(end),
+            "registrationkey": os.getenv('BLS_API_KEY')
+        }
+        response = requests.post(url, json=payload, headers=headers)
+        data = response.json()
+        series = data['Results']['series'][0]['data']
+        chunks.extend(series)
+    
+    df = pd.Series(
+        {f"{d['year']}-{d['period'].replace('M', '')}-01": float(d['value']) for d in chunks}
+    )
+    df.index = pd.to_datetime(df.index)
+    return df.sort_index()
 
 #Fred Setup
-load_dotenv()
-
 fred = Fred(api_key = os.getenv('FRED_API_KEY'))
 
 indicators ={
@@ -26,22 +50,28 @@ indicators ={
     'SOFR': 'SOFR',
 }
 
-results = {}
+#Series Data Aggregation
+series_data = {}
 
-#Terminal Preview
 for name, series_id in indicators.items():
-    data = fred.get_series(series_id)
-    results[name] = {
-        'Latest Value': round(float(data.iloc[-1]), 2),
-        'As of': data.index[-1].strftime('%Y-%m-%d')
-    }
+    series_data[name] = fred.get_series(series_id)
 
-bls_value, bls_date = get_bls_latest('CES0000000001')
-results['Nonfarm Payrolls'] = {
-    'Latest Value': bls_value,
-    'As of': bls_date
-}
+series_data['Nonfarm Payrolls'] = get_bls_latest('CES0000000001')
 
-df = pd.DataFrame.from_dict(results, orient='index')
+#Plotly Setup
 
-print(df)
+fig = make_subplots(
+    rows = 3, cols= 2,
+    subplot_titles=list(series_data.keys())
+)
+
+for i, (name, series) in enumerate(series_data.items()):
+    row = i // 2 + 1
+    col = i % 2 + 1
+    fig.add_trace(
+        go.Scatter(x=series.index, y=series.values, name=name),
+        row=row, col=col
+    )
+
+fig.update_layout(height=900, title_text='Macro Tracker', showlegend=False)
+fig.show()

@@ -16,29 +16,31 @@ A Python dashboard that pulls publicly available macroeconomic indicators from F
 ## Project Phases
 
 ### Phase 1 — Local Script (MVP)
-- [✅] Set up Python environment (`venv`, `requirements.txt`)
-- [✅] Register for free [FRED API key](https://fred.stlouisfed.org/docs/api/api_key.html)
-- [✅] Pull one indicator (e.g. US 10Y Yield) via `fredapi`
-- [✅] Expand to full indicator list
-- [✅] Store data in a pandas DataFrame
-- [✅] Print clean output to terminal
+- [x] Set up Python environment (`venv`, `requirements.txt`)
+- [x] Register for free [FRED API key](https://fred.stlouisfed.org/docs/api/api_key.html)
+- [x] Pull one indicator (e.g. US 10Y Yield) via `fredapi`
+- [x] Expand to full indicator list
+- [x] Store data in a pandas DataFrame
+- [x] Print clean output to terminal
 
-**Deliverable:** Script that runs locally and prints a table of indicators with latest values
+**Deliverable:** Script that runs locally and prints a table of indicators with latest values ✅
 
 ---
 
 ### Phase 2 — Visualization
-- [ ] Add matplotlib / plotly charts per indicator
+- [x] Add plotly charts per indicator
+- [x] Summary view showing all indicators at a glance (subplot grid)
 - [ ] Configurable time window (e.g. 1Y, 5Y)
-- [ ] Summary view showing all indicators at a glance
+- [ ] Combinatorial overlay (select multiple indicators on one chart)
 
-**Deliverable:** Local script that produces and saves charts as images
+**Deliverable:** Local script that produces interactive charts in browser
 
 ---
 
 ### Phase 3 — Dashboard
 - [ ] Rebuild as a Streamlit app
 - [ ] Interactive controls (date range picker, indicator selector)
+- [ ] Combinatorial chart with multiselect
 - [ ] Deploy to [Streamlit Community Cloud](https://streamlit.io/cloud) (free, public URL)
 
 **Deliverable:** Live public website anyone can visit
@@ -55,15 +57,14 @@ A Python dashboard that pulls publicly available macroeconomic indicators from F
 ## Indicator List
 
 ### 🇺🇸 United States (Phase 1–3)
-| Indicator | Source | FRED Series ID |
+| Indicator | Source | Series ID |
 |---|---|---|
-| ISM Manufacturing PMI | ISM / FRED | `MANEMP` |
-| Michigan Consumer Sentiment | U of Michigan / FRED | `UMCSENT` |
-| ADP Employment | ADP / FRED | `ADPWNUSNERSA` |
 | US 10Y Treasury Yield | FRED | `DGS10` |
-| SOFR | NY Fed / FRED | `SOFR` |
 | CPI (All Items) | BLS / FRED | `CPIAUCSL` |
 | Core PCE | BEA / FRED | `PCEPILFE` |
+| Michigan Consumer Sentiment | U of Michigan / FRED | `UMCSENT` ⚠️ 1 month delay |
+| SOFR | NY Fed / FRED | `SOFR` |
+| Nonfarm Payrolls | BLS API | `CES0000000001` |
 
 ### 🇪🇺 EU & 🇨🇦 Canada (Phase 4)
 | Indicator | Source |
@@ -103,25 +104,13 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Add your FRED API key
-cp .env.example .env
-# Edit .env and paste your key
-
-# Run the script
-python main.py
+# Add your API keys to .env
+FRED_API_KEY=your_fred_key
+BLS_API_KEY=your_bls_key
 ```
 
----
-
-## Environment Variables
-
-Create a `.env` file in the project root:
-
-```
-FRED_API_KEY=your_key_here
-```
-
-> Get a free key at [fred.stlouisfed.org](https://fred.stlouisfed.org/docs/api/api_key.html)
+> FRED key: [fred.stlouisfed.org](https://fred.stlouisfed.org/docs/api/api_key.html)  
+> BLS key: [data.bls.gov/registrationEngine](https://data.bls.gov/registrationEngine/)
 
 ---
 
@@ -131,11 +120,10 @@ FRED_API_KEY=your_key_here
 macro-tracker/
 ├── main.py              # Entry point
 ├── fetch.py             # API calls and data fetching
-├── process.py           # pandas transformations
 ├── visualize.py         # Chart generation
 ├── app.py               # Streamlit dashboard
 ├── requirements.txt
-├── .env.example
+├── .env
 └── README.md
 ```
 
@@ -143,7 +131,7 @@ macro-tracker/
 
 ## Status
 
-🟡 **Phase 1 in progress**
+🟡 **Phase 2 in progress**
 
 ---
 
