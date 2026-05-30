@@ -38,9 +38,9 @@ A Python dashboard that pulls publicly available macroeconomic indicators from F
 ---
 
 ### Phase 3 — Dashboard
-- [ ] Rebuild as a Streamlit app
-- [ ] Interactive controls (date range picker, indicator selector)
-- [ ] Combinatorial chart with multiselect
+- [x] Rebuild as a Streamlit app
+- [x] Interactive controls (date range picker, indicator selector)
+- [x] Combinatorial chart with multiselect
 - [ ] Deploy to [Streamlit Community Cloud](https://streamlit.io/cloud) (free, public URL)
 
 **Deliverable:** Live public website anyone can visit
