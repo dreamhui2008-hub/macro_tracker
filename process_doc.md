@@ -33,7 +33,7 @@ A Python dashboard that pulls publicly available macroeconomic indicators from F
 - [x] Configurable time window (e.g. 1Y, 5Y)
 - [x] Combinatorial overlay (select multiple indicators on one chart)
 
-**Deliverable:** Local script that produces interactive charts in browser
+**Deliverable:** Local script that produces interactive charts in browser ✅
 
 ---
 
@@ -41,16 +41,15 @@ A Python dashboard that pulls publicly available macroeconomic indicators from F
 - [x] Rebuild as a Streamlit app
 - [x] Interactive controls (date range picker, indicator selector)
 - [x] Combinatorial chart with multiselect
-- [ ] Deploy to [Streamlit Community Cloud](https://streamlit.io/cloud) (free, public URL)
+- [x] Deploy to [Streamlit Community Cloud](https://streamlit.io/cloud) (free, public URL)
 
-**Deliverable:** Live public website anyone can visit
+**Deliverable:** Live public website anyone can visit ✅
 
 ---
 
 ### Phase 4 — Expand Coverage
 - [ ] Add EU indicators (ECB, Eurostat)
 - [ ] Add Canada indicators (Bank of Canada, StatCan)
-- [ ] Add data freshness labels (last updated timestamp per indicator)
 
 ---
 
