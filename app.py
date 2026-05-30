@@ -19,7 +19,7 @@ st.set_page_config(
 )
 
 #Fred Setup
-fred = Fred(api_key = st.secrets('FRED_API_KEY'))
+fred = Fred(api_key = st.secrets['FRED_API_KEY'])
 
 indicators ={
     'US 10Y Yield': 'DGS10',
@@ -50,7 +50,7 @@ def load_bls_data():
             "seriesid": ['CES0000000001'], #id for Nonfarm Payrolls
             "startyear": str(start),
             "endyear": str(end),
-            "registrationkey": st.secrets('BLS_API_KEY')
+            "registrationkey": st.secrets['BLS_API_KEY']
         }
         response = requests.post(url, json=payload, headers=headers)
         data = response.json()
