@@ -15,7 +15,7 @@ def build_subplot_grid(filter_data, cutoff):
             go.Scatter(x=filtered.index, y=filtered.values, name=name),
             row=row, col=col
         )
-    fig.update_layout(height=900, title_text='Macro Tracker', showlegend=False)
+    fig.update_layout(height=900, title_text='Macro Tracker', showlegend=False, template='plotly_dark')
     return fig
 
 def build_overlay_chart(overlay_selected, filter_data, cutoff, normalize, zscore):
@@ -49,6 +49,7 @@ def build_overlay_chart(overlay_selected, filter_data, cutoff, normalize, zscore
             y=1.02,
             xanchor='right',
             x=1
-        )
+        ),
+        template='plotly_dark'
     )
     return fig

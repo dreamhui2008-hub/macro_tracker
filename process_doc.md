@@ -55,7 +55,7 @@ A Python dashboard that pulls publicly available macroeconomic indicators from F
 
 ## Indicator List
 
-### 🇺🇸 United States (Phase 1–3)
+### United States (Phase 1–3)
 | Indicator | Source | Series ID |
 |---|---|---|
 | US 10Y Treasury Yield | FRED | `DGS10` |
@@ -65,7 +65,7 @@ A Python dashboard that pulls publicly available macroeconomic indicators from F
 | SOFR | NY Fed / FRED | `SOFR` |
 | Nonfarm Payrolls | BLS API | `CES0000000001` |
 
-### 🇪🇺 EU & 🇨🇦 Canada (Phase 4)
+### EU & Canada (Phase 4)
 | Indicator | Source |
 |---|---|
 | ECB Deposit Rate | ECB |
